@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 
 const Game = () => {
     const [number, setNumber] = useState(Math.round(Math.random() * 10))
@@ -13,6 +13,15 @@ const Game = () => {
 
 
     const handleClick = () => {
+
+        if (number === +guess) {
+            setMessage('Вы выиграли')
+            setScore(score + 1)
+        }
+        if (freeAttempt === 0) {
+            setMessage('Вы проиграли')
+        }
+
         if (freeAttempt) {
             setFreeAttempt(freeAttempt - 1)
         }
@@ -25,15 +34,7 @@ const Game = () => {
 
 
     }
-    useEffect(() => {
-        if (number === +guess) {
-            setMessage('Вы выиграли')
-            setScore(score + 1)
-        }
-        if (freeAttempt === 0) {
-            setMessage('Вы проиграли')
-        }
-    }, [freeAttempt, guess, number, score])
+
 
     return (
         <div className="container">
@@ -42,8 +43,10 @@ const Game = () => {
                     <h1>Угадай число от 0 до 10. <br/> C 3х попыток</h1>
 
                     <div className={'d-flex'}>
-                        <input type="number" onChange={handleInput} placeholder='Введите число' className='form-control'/>
-                        <button onClick={handleClick} disabled={!guess} className={'btn btn-success ms-2 '}>Check</button>
+                        <input type="number" onChange={handleInput} placeholder='Введите число'
+                               className='form-control'/>
+                        <button onClick={handleClick} disabled={!guess} className={'btn btn-success ms-2 '}>Check
+                        </button>
                         <button onClick={handleRestart} className={'btn btn-warning ms-2'}>restart</button>
                     </div>
                     {
