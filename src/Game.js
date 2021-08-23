@@ -33,7 +33,7 @@ const Game = () => {
         if (freeAttempt === 0) {
             setMessage('Вы проиграли')
         }
-    }, [freeAttempt])
+    }, [freeAttempt, guess, number, score])
 
     return (
         <div className="container">
@@ -59,5 +59,4 @@ const Game = () => {
         </div>
     );
 };
-
 export default Game;
